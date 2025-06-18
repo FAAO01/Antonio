@@ -24,6 +24,7 @@ const Layout = ({ children }: LayoutProps) => {
   const [horaActual, setHoraActual] = useState("");
   const [facturasAbierto, setFacturasAbierto] = useState(false);
   const [usuariosAbierto, setUsuariosAbierto] = useState(false);
+  const [productosAbierto, setProductosAbierto] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -124,7 +125,7 @@ const Layout = ({ children }: LayoutProps) => {
                     isActive("/facturas/ventas-diarias") ? "bg-gray-700 font-semibold" : ""
                   }`}
                 >
-                  Registro de ventas
+                  Clientes
                 </Link>
                 <Link
                   to="/facturas/devoluciones"
@@ -141,6 +142,52 @@ const Layout = ({ children }: LayoutProps) => {
                   }`}
                 >
                   Descuentos
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Gestión de Productos con submenú */}
+          <div>
+            <button
+              onClick={() => setProductosAbierto(!productosAbierto)}
+              className={`flex items-center gap-3 p-3 rounded hover:bg-gray-700 w-full text-left ${
+                location.pathname.startsWith("/productos") ? "bg-gray-700 font-semibold" : ""
+              }`}
+            >
+              <FiSettings size={20} />
+              {isSidebarOpen && (
+                <>
+                  <span className="flex-grow">Gestión de Productos</span>
+                  {productosAbierto ? <FiChevronUp /> : <FiChevronDown />}
+                </>
+              )}
+            </button>
+            {productosAbierto && isSidebarOpen && (
+              <div className="ml-7 mt-2 space-y-2 text-sm">
+                <Link
+                  to="/productos/categoria"
+                  className={`block p-2 rounded hover:bg-gray-700 ${
+                    isActive("/productos/categoria") ? "bg-gray-700 font-semibold" : ""
+                  }`}
+                >
+                  Categoría
+                </Link>
+                <Link
+                  to="/productos/productos"
+                  className={`block p-2 rounded hover:bg-gray-700 ${
+                    isActive("/productos/productos") ? "bg-gray-700 font-semibold" : ""
+                  }`}
+                >
+                  Productos
+                </Link>
+                <Link
+                  to="/productos/proveedores"
+                  className={`block p-2 rounded hover:bg-gray-700 ${
+                    isActive("/productos/proveedores") ? "bg-gray-700 font-semibold" : ""
+                  }`}
+                >
+                  Proveedores
                 </Link>
               </div>
             )}
