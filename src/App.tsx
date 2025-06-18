@@ -11,6 +11,7 @@ import User from "./pages/User";
 import Categoria from "./pages/Categoria.tsx";
 import Productos from "./pages/Productos.tsx";
 import Proveedores from "./pages/Proveedores.tsx";
+import Copia from "./pages/Copia";
 
 function App() {
   return (
@@ -38,6 +39,9 @@ function App() {
 
         {/* Rutas de configuracion */}
         <Route path="/settings" element={<Layout><h2>Configuración</h2></Layout>} />
+
+        {/* Rutas de copia de seguridad */}
+        <Route path="/copia-de-seguridad" element={<Layout><Copia /></Layout>} />
       </Routes>
     </Router>
   );

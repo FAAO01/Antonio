@@ -11,8 +11,6 @@ import {
   FiFileText,
   FiChevronDown,
   FiChevronUp,
-  FiUsers,
-  FiUserPlus,
 } from "react-icons/fi";
 
 interface LayoutProps {
@@ -23,7 +21,6 @@ const Layout = ({ children }: LayoutProps) => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [horaActual, setHoraActual] = useState("");
   const [facturasAbierto, setFacturasAbierto] = useState(false);
-  const [usuariosAbierto, setUsuariosAbierto] = useState(false);
   const [productosAbierto, setProductosAbierto] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -59,20 +56,14 @@ const Layout = ({ children }: LayoutProps) => {
 
   const sidebarWidth = isSidebarOpen ? "w-50" : "w-20";
   const contentPadding = isSidebarOpen ? "pl-[200px]" : "pl-[80px]";
-
-  // Función para verificar si una ruta está activa
   const isActive = (path: string) => location.pathname === path;
-
-  // Función para verificar si estamos en alguna subruta de facturas
   const isSubRutaFactura = location.pathname.startsWith("/facturas");
 
-  // Función para verificar si estamos en alguna subruta de usuarios
-  const isSubRutaUsuarios = location.pathname.startsWith("/profile");
-
   return (
-    <div className="min-h-screen bg-gray-0">
+    <div className="h-screen overflow-hidden bg-gray-50">
+      {/* Sidebar con scroll */}
       <aside
-        className={`fixed top-0 left-0 h-screen bg-gray-900 text-white flex flex-col transition-all duration-300 ${sidebarWidth} p-3 z-50`}
+        className={`fixed top-0 left-0 h-screen bg-gray-900 text-white flex flex-col transition-all duration-300 ${sidebarWidth} p-3 z-50 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800`}
       >
         <button
           onClick={() => setSidebarOpen(!isSidebarOpen)}
@@ -91,7 +82,7 @@ const Layout = ({ children }: LayoutProps) => {
             <FiHome size={20} /> {isSidebarOpen && "Dashboard"}
           </Link>
 
-          {/* Facturas con submenú */}
+          {/* Facturas */}
           <div>
             <button
               onClick={() => setFacturasAbierto(!facturasAbierto)}
@@ -107,8 +98,6 @@ const Layout = ({ children }: LayoutProps) => {
                 </>
               )}
             </button>
-
-            {/* Submenú desplegable */}
             {facturasAbierto && isSidebarOpen && (
               <div className="ml-7 mt-2 space-y-2 text-sm">
                 <Link
@@ -147,7 +136,7 @@ const Layout = ({ children }: LayoutProps) => {
             )}
           </div>
 
-          {/* Gestión de Productos con submenú */}
+          {/* Productos */}
           <div>
             <button
               onClick={() => setProductosAbierto(!productosAbierto)}
@@ -193,7 +182,7 @@ const Layout = ({ children }: LayoutProps) => {
             )}
           </div>
 
-          {/* Usuarios como ruta directa */}
+          {/* Usuarios */}
           <Link
             to="/Profile/nuevo-usuario"
             className={`flex items-center gap-3 p-3 rounded hover:bg-gray-700 ${
@@ -203,6 +192,7 @@ const Layout = ({ children }: LayoutProps) => {
             <FiUser size={20} /> {isSidebarOpen && "Usuarios"}
           </Link>
 
+          {/* Configuración */}
           <Link
             to="/settings"
             className={`flex items-center gap-3 p-3 rounded hover:bg-gray-700 ${
@@ -223,8 +213,9 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
       </aside>
 
+      {/* Contenido principal */}
       <div
-        className={`flex flex-col min-h-screen transition-all duration-300 ${contentPadding}`}
+        className={`flex flex-col h-screen transition-all duration-300 ${contentPadding} overflow-hidden`}
       >
         <header className="bg-blue-600 text-white p-4 shadow-md sticky top-0 z-10 flex justify-between items-center">
           <h1 className="text-2xl font-bold">Panel de Control</h1>
@@ -235,7 +226,7 @@ const Layout = ({ children }: LayoutProps) => {
           </div>
         </header>
 
-        <main className="p-6 flex-grow">{children}</main>
+        <main className="p-6 flex-grow overflow-y-auto">{children}</main>
       </div>
     </div>
   );
