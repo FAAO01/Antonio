@@ -41,7 +41,7 @@ function App() {
         <Route path="/settings" element={<Layout><h2>Configuración</h2></Layout>} />
 
         {/* Rutas de copia de seguridad */}
-        <Route path="/copia-de-seguridad" element={<Layout><Copia /></Layout>} />
+        <Route path="/copia" element={<Layout><Copia /></Layout>} />
       </Routes>
     </Router>
   );

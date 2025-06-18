@@ -11,6 +11,7 @@ import {
   FiFileText,
   FiChevronDown,
   FiChevronUp,
+  FiDatabase, // <-- NUEVO: ícono para copia de seguridad
 } from "react-icons/fi";
 
 interface LayoutProps {
@@ -200,6 +201,16 @@ const Layout = ({ children }: LayoutProps) => {
             }`}
           >
             <FiSettings size={20} /> {isSidebarOpen && "Configuración"}
+          </Link>
+
+          {/* Copia de Seguridad */}
+          <Link
+            to="/copia"
+            className={`flex items-center gap-3 p-3 rounded hover:bg-gray-700 ${
+              isActive("/copia") ? "bg-gray-700 font-semibold" : ""
+            }`}
+          >
+            <FiDatabase size={20} /> {isSidebarOpen && "Copia de Seguridad"}
           </Link>
         </nav>
 
