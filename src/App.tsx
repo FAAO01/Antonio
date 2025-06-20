@@ -12,6 +12,7 @@ import Categoria from "./pages/Categoria.tsx";
 import Productos from "./pages/Productos.tsx";
 import Proveedores from "./pages/Proveedores.tsx";
 import Copia from "./pages/Copia";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -38,7 +39,7 @@ function App() {
         <Route path="/productos/proveedores" element={<Layout><Proveedores /></Layout>} />
 
         {/* Rutas de configuracion */}
-        <Route path="/settings" element={<Layout><h2>Configuración</h2></Layout>} />
+        <Route path="/settings" element={<Layout><Settings></Settings></Layout>} />
 
         {/* Rutas de copia de seguridad */}
         <Route path="/copia" element={<Layout><Copia /></Layout>} />
